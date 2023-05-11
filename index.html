@@ -60,83 +60,100 @@
 					</script>
 				  </body>
 				  
-				  
 				  <head>
 					<style>
-					  #audio-overlay {
-						position: fixed;
-						bottom: 10px;
-						right: 10px;
-						background-color: rgba(0, 0, 0, 0);
-						padding: 3px;
-						border-radius: 3px;
-						color: #fff;
-						z-index: 9999;
-						font-size: 10px;
-					  }
-				  
-					  #audio-overlay button {
-						background-color: transparent;
-						color: #fff;
-						border: none;
-						cursor: pointer;
-						margin-right: 3px;
-						font-size: 8px;
-					  }
-				  
-					  #volume-slider {
-						width: 60px;
-						height: 3px;
-						background-color: #888;
-						border-radius: 3px;
-						-webkit-appearance: none;
-						appearance: none;
-						outline: none;
-						margin-top: 2px;
-					  }
-				  
-					  #volume-slider::-webkit-slider-thumb {
-						-webkit-appearance: none;
-						appearance: none;
-						width: 8px;
-						height: 8px;
-						background-color: #fff;
-						border-radius: 50%;
-						cursor: pointer;
-					  }
-					</style>
-				  </head>
-				  <body>
-					<div id="audio-overlay">
-					  <button id="play-pause-btn">Play</button>
-					  <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="1">
-					</div>
-				  
-					<audio id="audio" preload="none" loop>
-					  <source src="images/audio/videoplayback.m4a">
-					  Seu navegador não suporta o elemento de áudio.
-					</audio>
-				  
-					<script>
-					  var audio = document.getElementById('audio');
-					  var playPauseBtn = document.getElementById('play-pause-btn');
-					  var volumeSlider = document.getElementById('volume-slider');
-				  
-					  playPauseBtn.addEventListener('click', function() {
-						if (audio.paused) {
-						  audio.play();
-						  playPauseBtn.textContent = 'Pause';
-						} else {
-						  audio.pause();
-						  playPauseBtn.textContent = 'Play';
+						/* Estilos gerais */
+						#audio-player {
+							position: fixed;
+							bottom: 20px;
+							right: 20px;
+							background-color: #33333300;
+							color: white;
+							font-family: Arial, sans-serif;
+							padding: 10px;
+							border-radius: 5px;
+							display: flex;
+							align-items: center;
 						}
-					  });
-				  
-					  volumeSlider.addEventListener('input', function() {
-						audio.volume = volumeSlider.value;
-					  });
+				
+						/* Estilos do botão */
+						#audio-player button {
+							background: none;
+							border: none;
+							color: white;
+							cursor: pointer;
+							font-size: 16px;
+							margin-right: 10px;
+						}
+				
+						/* Estilos da barra de volume */
+						#audio-player input[type="range"] {
+							-webkit-appearance: none;
+							background-color: transparent;
+							width: 100px;
+							height: 4px;
+							margin-left: 10px;
+						}
+				
+						#audio-player input[type="range"]::-webkit-slider-thumb {
+							-webkit-appearance: none;
+							width: 10px;
+							height: 10px;
+							background-color: white;
+							border-radius: 50%;
+							cursor: pointer;
+						}
+				
+						/* Estilos do texto */
+						#audio-player span {
+							font-size: 14px;
+						}
+					</style>
+				</head>
+				<body>
+					<div id="audio-player">
+						<button id="play-pause-button">Play</button>
+						<input type="range" id="volume-slider" min="0" max="1" step="0.1" value="1">
+						<span id="volume-text">Volume: 100%</span>
+						<audio id="audio" src="images/audio/quer voar.mp3"></audio>
+					</div>
+				
+					<script>
+						// Obtém os elementos do DOM
+						const playPauseButton = document.getElementById('play-pause-button');
+						const volumeSlider = document.getElementById('volume-slider');
+						const volumeText = document.getElementById('volume-text');
+						const audioElement = document.getElementById('audio');
+				
+						// Adiciona um ouvinte de eventos ao botão
+						playPauseButton.addEventListener('click', function() {
+							if (audioElement.paused) {
+								// Lógica para iniciar a reprodução do áudio
+								audioElement.play();
+								playPauseButton.textContent = 'Pause';
+							} else {
+								// Lógica para pausar a reprodução do áudio
+								audioElement.pause();
+								playPauseButton.textContent = 'Play';
+							}
+						});
+				
+						// Adiciona um ouvinte de eventos à barra de volume
+						volumeSlider.addEventListener('input', function() {
+							const volumeValue = volumeSlider.value;
+							// Lógica para ajustar o volume do áudio
+							audioElement.volume = volumeValue;
+							volumeText.textContent = 'Volume: ' + Math.round(volumeValue * 100) + '%';
+						});
+				
+						// Adiciona um ouvinte de eventos para a reprodução automática do segundo áudio
+						audioElement.addEventListener('ended', function() {
+							// Lógica para reproduzir o segundo áudio
+							audioElement.src = 'images/audio/groupies.mp3';
+							audioElement.play();
+						});
 					</script>
-				  </body>
+				</body>
 
 				<!-- Header -->
 					<header id="header">
@@ -147,8 +164,8 @@
 							<ul>
 								<li><a href="#Jogos">Jogos</a></li>
 								<li><a href="#work">MP4 Marcio</a></li>
-								<li><a href="#about">About</a></li>
-								<li><a href="#contact">Contato</a></li>
+								<li><a href="#about"> MP4 Privados</a></li>
+								<li><a href="#contact">Instagram</a></li>
 								<!--<li><a href="#elements">Elements</a></li>-->
 							</ul>
 						</nav>
@@ -161,7 +178,8 @@
 							<article id="Jogos">
 								<h2 class="major">Jogos</h2>
 								
-								<p><a href="https://www.mediafire.com/file/vwzol9fqop2x61r/PacMan.rar/file" download="Pac Marcio">Pac Marcio</a>    </a></p>
+					
+
 								<p>Coming Soon...</p>
 							</article>
 
@@ -186,45 +204,81 @@
 											height="200"
 											autoplay										
 											>
-								<p><font color="white">Diversos Videos deste ser Humano</p>
+								<p>>...</p>
 							</article>
 
 						<!-- About -->
 							<article id="about">
-								<h2 class="major">About</h2>
-								<span class="image main"><img src="images/pic03.jpg" alt="" /></span>
-								<p>Lorem ipsum dolor sit amet, consectetur et adipiscing elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices. Aliquam libero et malesuada fames ac ante ipsum primis in faucibus. Cras viverra ligula sit amet ex mollis mattis lorem ipsum dolor sit amet.</p>
+								<h2 class="major">videos privados</h2>
+								<p>Todos os videos privados do Canal - ASHOW E JAZER -</p>
+								<p><a href="https://youtu.be/KuhQngaknc8" download="JANILSON NA VIDA VIRTUAL !!">▶ JANILSON NA VIDA VIRTUAL !!</a></p>
+								<p><a href="https://youtu.be/CdEptrb3zRc" download="ANTI RP Á CIGANO NA ARÁBIA!! KKK">▶ ANTI RP Á CIGANO NA ARÁBIA!! KKK</a></p>
+								<p><a href="https://youtu.be/uGFlI0S2pMk" download="RANDOM MOMENTS CUS PARÇA #2">▶ RANDOM MOMENTS CUS PARÇA #2</a></p>
+								<p><a href="https://youtu.be/lBs4XgX3sh0" download="JANILSON KILO NA VIDA VIRTUAL+ MELHORES MOMENTOS CSGO">▶ JANILSON KILO NA VIDA VIRTUAL+ MELHORES MOMENTOS CSGO</a></p>
+								<p><a href="https://youtu.be/ak_SCVxldL0" download="MELHORES SUSTOS #1 / PACIFY">▶ MELHORES SUSTOS #1 / PACIFY</a></p>
+								<p><a href="https://youtu.be/ZLj1DoEAIk0" download="NAO SOMOS CULPADOS POR DANOS CEREBRAIS !">▶ NAO SOMOS CULPADOS POR DANOS CEREBRAIS !</a></p>
+								<p><a href="https://youtu.be/HLBmzzJM9g0" download="Black Ops 2 em 2022 é muita nostalgia !!">▶ Black Ops 2 em 2022 é muita nostalgia !!</a></p>
+								<p><a href="https://youtu.be/WW0W-XtybR8" download="árabes a jogar jogos de terror !!">▶ árabes a jogar jogos de terror !!</a></p>
+								<p><a href="https://youtu.be/EEcX8a8M9S4" download="ÁRABES presentes no CSGO !!!">▶ ÁRABES presentes no CSGO !!!</a></p>
 							</article>
 
 						<!-- Contact -->
 							<article id="contact">
-								<h2 class="major">Contact</h2>
-								<form method="post" action="#">
-									<div class="fields">
-										<div class="field half">
-											<label for="name">Name</label>
-											<input type="text" name="name" id="name" />
-										</div>
-										<div class="field half">
-											<label for="email">Email</label>
-											<input type="text" name="email" id="email" />
-										</div>
-										<div class="field">
-											<label for="message">Message</label>
-											<textarea name="message" id="message" rows="4"></textarea>
-										</div>
+								<head>
+									<title>Overlay de Redes Sociais</title>
+									<style>
+										/* Estilo para o overlay */
+										.overlay {
+											position: fixed;
+											top: 0;
+											left: 0;
+											width: 100%;
+											height: 100%;
+											background-color: rgba(0, 0, 0, 0.5); /* Cor de fundo com transparência */
+											display: flex;
+											justify-content: center;
+											align-items: center;
+											z-index: 9999; /* Certifique-se de que o overlay esteja acima dos outros elementos */
+										}
+								
+										/* Estilo para os ícones de redes sociais */
+										.overlay .social-icons {
+											list-style-type: none;
+											padding: 0;
+											margin: 0;
+											display: flex;
+										}
+								
+										.overlay .social-icons li {
+											margin: 0 10px;
+										}
+								
+										.overlay .social-icons li a {
+											color: #ffffff;
+											font-size: 24px;
+											text-decoration: none;
+										}
+									</style>
+								</head>
+								<body>
+									
+									
+									<!-- Overlay -->
+									<div id="overlay" class="overlay">
+										<ul class="social-icons">
+											<li><a href="https://www.instagram.com/vasco_jeronimo" download="Instagram">Instagram</a></li>
+											<li><a href="https://www.instagram.com/wyd_bruno" download="Instagram">Instagram</a></li>
+											<li><a href="https://www.instagram.com/xalana__" download="Instagram">Instagram</a></li>
+											<li><a href="https://www.instagram.com/_.marciio._" download="Instagram">Instagram</a></li>
+										</ul>
 									</div>
-									<ul class="actions">
-										<li><input type="submit" value="Send Message" class="primary" /></li>
-										<li><input type="reset" value="Reset" /></li>
-									</ul>
-								</form>
-								<ul class="icons">
-									<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-									<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-									<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-									<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-								</ul>
+								
+									<script>
+										window.onload = function() {
+											document.getElementById('overlay').style.display = 'flex';
+										};
+									</script>
+								</body>
 							</article>
 
 						<!-- Elements -->
